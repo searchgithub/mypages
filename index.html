@@ -10,11 +10,11 @@
 <table id="tb_input_var">
 <tr>  
 <td>queue_rate: </td>
-        <td> <input id="queue_rate" type="text" style="width:25px"   value="34" name="queue_rate(default:34)" /></td>  
+        <td> <input id="queue_rate" type="text" style="width:25px"   value="31" name="queue_rate" /></td>  
 </tr>
 <tr>  
 <td>add_rate: </td>
-        <td> <input id="add_rate" type="text" style="width:25px"   value="45" name="add_rate(default:45)" /></td>  
+        <td> <input id="add_rate" type="text" style="width:25px"   value="45" name="add_rate" /></td>  
 </tr>
 </table>  
 
@@ -102,12 +102,12 @@
             
             case '+':
                 total_add_mins = Math.round(queue_number/queue_rate) ;
-                output_duration_hour = Math.floor(total_add_mins/ 60 );
+                output_duration_hour = Math.ceil(total_add_mins/ 60 );
                 output_duration_min = total_add_mins  % 60 ;
 
                 output_total_mins = cur_total_mins + total_add_mins ;
 
-                output_time_hour = Math.floor(output_total_mins / 60 );
+                output_time_hour = Math.ceil(output_total_mins / 60 );
                 output_time_min_temp =   output_total_mins  % 60 ;
                 output_time_min = PrefixInteger(output_time_min_temp, 2);
                 break;  
@@ -118,10 +118,10 @@
                 
                 total_add_mins =  Math.round( ( ( queue_rate * tar_total_mins- queue_rate* cur_total_mins ) - queue_number ) / add_rate );
                 output_total_mins = cur_total_mins + total_add_mins;
-                output_duration_hour = Math.floor(total_add_mins / 60 );
+                output_duration_hour = Math.ceil(total_add_mins / 60 );
                 output_duration_min = total_add_mins % 60 ;
                 
-                output_time_hour = Math.floor(output_total_mins / 60 );
+                output_time_hour = Math.ceil(output_total_mins / 60 );
                 output_time_min_temp =   output_total_mins  % 60 ;
                 output_time_min = PrefixInteger(output_time_min_temp, 2);
                 break; 
