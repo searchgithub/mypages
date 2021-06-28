@@ -51,6 +51,9 @@
            
         tb.style.display = "block";  
     }
+    function PrefixInteger(num, length) {
+      return (Array(length).join('0') + num).slice(-length);
+    }
 
     function calc()  
     {  
@@ -65,12 +68,14 @@
             case '+':
                 output_total_mins = hour * 60 + minute + Math.round(queue_number/25) ;
                 output_time_hour = Math.floor(output_total_mins / 60 );
-                output_time_min = output_total_mins  % 60;
+                output_time_min_temp =   output_total_mins  % 60 ;
+				output_time_min = PrefixInteger(output_time_min_temp, 2)
                 break;  
             case '-':  
                 output_total_mins = hour * 60 + minute - Math.round(queue_number/25) ;
                 output_time_hour = Math.floor(output_total_mins / 60 );
-                output_time_min = output_total_mins  % 60;
+                output_time_min_temp =   output_total_mins  % 60 ;
+				output_time_min = PrefixInteger(output_time_min_temp, 2)
                 break; 
             default:  
                 output_time = '';  
