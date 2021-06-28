@@ -1,0 +1,84 @@
+<!DOCTYPE html>  
+<!-- reference https://zhidao.baidu.com/question/135014725781428725.html -->
+<html>  
+<head>  
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />  
+<title></title>  
+</head>  
+<body>  
+<table>  
+    <tr>
+       direct(current time and current queue number, 25 queue number equals 1 minute) <br>
+       reverse(target time and current queue number, 25 queue number equals 1 minute) <br>
+      <td><input type="button" value="direct"     onclick="setOp('+', 'direct');"/></td>
+      <td><input type="button" value="reverse"  onclick="setOp('-', 'reverse');"/></td>  
+    </tr>  
+</table>  
+<table id="tb_calc" style="display:none;">  
+     <tr>  
+        <td> <input id="hour" type="text" style="width:25px"   value="" name="hour" /></td>  
+        <td>:</td>  
+        <td> <input id="minute" type="text" style="width:25px"  width: 2px;value="" name="minute" /></td>  
+        <td> <lable id="op"  name="op"></lable> </td>  
+        <td> <input id="queue_number" type="text" style="width:70px" value="" name="queue_number" /> </td>  
+        <td> <input id="opTips" type="button" value="" onclick="calc();"/> </td> 
+        <td>预估的输出时间</td>  
+        <td> <lable id="output_time_hour" name="output_time_hour"></lable> </td>  
+        <td>:</td>  
+        <td> <lable id="output_time_min" name="output_time_min"></lable> </td>  
+    </tr>  
+</table>  
+<script type="application/javascript">  
+    function setOp(op, opTips)  
+    {  
+        var tb=document.getElementById("tb_calc");  
+        tb.style.display = "none";  
+        if(op == "+")
+		{
+		var h_now = new Date(),h_hour = h_now.getHours(), h_minute = h_now.getMinutes()
+		  document.getElementById("hour").value = h_hour;   
+		  document.getElementById("minute").value = h_minute;   
+		}
+		else
+		{
+		 document.getElementById("hour").value = "";   
+		 document.getElementById("minute").value = "";
+		}
+        
+        document.getElementById("queue_number").innerText = "";   
+        document.getElementById("op").innerText = op;  
+        document.getElementById("opTips").value = opTips;  
+           
+        tb.style.display = "block";  
+    }
+
+    function calc()  
+    {  
+        var hour  = parseInt(document.getElementById("hour").value);   
+        var minute  = parseInt(document.getElementById("minute").value);  
+        var queue_number  = parseInt(document.getElementById("queue_number").value);  
+        var op = document.getElementById("op").innerText;  
+           
+        var output_time = "";  
+        switch(op)  
+        {  
+            case '+':
+                output_total_mins = hour * 60 + minute + Math.round(queue_number/25) ;
+                output_time_hour = Math.floor(output_total_mins / 60 );
+                output_time_min = output_total_mins  % 60;
+                break;  
+            case '-':  
+                output_total_mins = hour * 60 + minute - Math.round(queue_number/25) ;
+                output_time_hour = Math.floor(output_total_mins / 60 );
+                output_time_min = output_total_mins  % 60;
+                break; 
+            default:  
+                output_time = '';  
+        }  
+        console.log(hour, minute, op, queue_number, '=', output_time_hour, output_time_min);  
+        document.getElementById("output_time_hour").innerText = output_time_hour;
+        document.getElementById("output_time_min").innerText = output_time_min;
+    }  
+</script>  
+</body>  
+</html>
